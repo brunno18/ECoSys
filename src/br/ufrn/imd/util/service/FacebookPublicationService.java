@@ -9,9 +9,14 @@ import com.restfb.FacebookClient.AccessToken;
 import com.restfb.types.FacebookType;
 
 import br.ufrn.imd.model.Publicacao;
+import br.ufrn.imd.util.dao.IDAOCredential;
 import br.ufrn.imd.util.model.Credential;
 
 public class FacebookPublicationService extends PublicationService {
+	
+	public FacebookPublicationService (IDAOCredential daoCredential) {
+		this.daoCredential = daoCredential;
+	}
 
 	@Override
 	public void publicarEvento(Publicacao publicacao) throws PublicationException {

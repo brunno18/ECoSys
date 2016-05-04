@@ -2,6 +2,8 @@ package br.ufrn.imd.util.model;
 
 public class Credential {
 	
+	private String service;
+	
 	private String appId;
 	
 	private String appSecret;
