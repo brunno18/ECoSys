@@ -7,10 +7,13 @@ import br.ufrn.imd.model.*;
 //import br.ufrn.imd.util.service.PublicationService;
 //import br.ufrn.imd.view.GerenciadorEventoGUI;
 
-public class GerenciadorEvento{
-	private Publicacao publicacao;
+public class GerenciadorEvento {
 	
-	public Publicacao criarEvento(Local local, Participante participante, String descricao, String title){
+	List<Evento> eventos = new ArrayList<Evento>();
+	
+	NotificadorEvento notificador;
+	
+	public void criarEvento(Local local, List<Participante> participante, String descricao, String title, Date data){
 		//Evento evento;
 		Evento evento = new Evento();
 		
@@ -18,11 +21,17 @@ public class GerenciadorEvento{
 		evento.setParticipante(participante);
 		evento.setDescricao(descricao);
 		evento.setTitulo(title);
+		evento.setDataEvento(data);
 		
-		publicacao.setEvento(evento);
-		
-		return publicacao;
+		eventos.add(evento);
 		//return evento;
 	}
 	
+	public void notificarEventosProximos(Date dias){
+		for(Evento evento: eventos){
+			if(evento.getDataEvento() != dias){
+				notificador.notificarProximidade(evento);
+			}	
+		}
+	}
 }

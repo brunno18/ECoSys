@@ -1,9 +1,13 @@
 package br.ufrn.imd.controller;
 
-public class NotificadorEvento {
+import java.util.*;
+import br.ufrn.imd.model.*;
 
-	public void notificarProximidade() {
+public class NotificadorEvento {
+	private FabricaNotificacao noticefactory;
 	
+	public void notificarProximidade(Evento evento) {
+		Notificacao notice = noticefactory.gerarNotificacaoProximidade(evento);
 	}
 	
 	public void notificarMudanca() {
