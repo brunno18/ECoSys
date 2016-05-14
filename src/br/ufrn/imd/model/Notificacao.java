@@ -1,6 +1,6 @@
 package br.ufrn.imd.model;
 
-public abstract class Notificacao {
+public class Notificacao {
 	
 	private String titulo;
 	
@@ -19,7 +19,4 @@ public abstract class Notificacao {
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
 	}
-	
-	public abstract void notificar(Participante participante);
-	
 }
