@@ -13,12 +13,12 @@ public class GerenciadorEvento {
 	
 	NotificadorEvento notificador;
 	
-	public void criarEvento(Local local, List<Participante> participante, String descricao, String title, Date data){
+	public void criarEvento(Local local, List<Participante> participantes, String descricao, String title, Date data){
 		//Evento evento;
 		Evento evento = new Evento();
 		
 		evento.setLocal(local);
-		evento.setParticipante(participante);
+		evento.setParticipantes(participantes);
 		evento.setDescricao(descricao);
 		evento.setTitulo(title);
 		evento.setDataEvento(data);

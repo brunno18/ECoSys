@@ -1,7 +1,9 @@
 package br.ufrn.imd.model;
 
-public class Notificacao {
+public abstract class Notificacao {
+	
 	private String titulo;
+	
 	private String mensagem;
 	
 	public String getTitulo() {
@@ -18,9 +20,6 @@ public class Notificacao {
 		this.mensagem = mensagem;
 	}
 	
-	public void enviar(){
-		System.out.println("Enviando notificacao...");
-		System.out.println(getMensagem());
-	}
+	public abstract void notificar(Participante participante);
 	
 }

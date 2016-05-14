@@ -2,61 +2,60 @@ package br.ufrn.imd.model;
 import java.util.*;
 
 public class Evento {
-	Local local;
-	
-	Participante participante;
-	
-	//Publicacao publicacao;
-	List<Participante> participantes;
-	
-	private String title;
-	private String descricao;
 	
 	private int id;
+	
+	private String title;
+	
+	private String descricao;
+	
+	private  Local local;
+	
+	private List<Participante> participantes;
+	
 	private boolean cancelado;
+	
 	private Date dataEvento;
 	
-	public void setTitulo(String title){
-		this.title = title;
-	}
 	
-	public void setDescricao(String descricao){
-		this.descricao = descricao;
-	}
-	
-	public void setLocal(Local local){
-		this.local = local;
-	}
-	
-	public void setParticipante(List<Participante> participantes){
-		this.participantes = participantes;
-	}
-
-	public Local getLocal(){
-		return local;
-	}
-	public List<Participante> getParticipante(){
-		return participantes;
-	}
-	
-	public String getTitulo(){
-		return title;
-	}
-	
-	public String getDescicao(){
-		return descricao;
-	}
-
-	public String getDescricao(){
-		return descricao;
-	}
-
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getTitulo(){
+		return title;
+	}
+	
+	public void setTitulo(String title){
+		this.title = title;
+	}	
+	
+	public String getDescicao(){
+		return descricao;
+	}
+	
+	public void setDescricao(String descricao){
+		this.descricao = descricao;
+	}
+	
+	public Local getLocal(){
+		return local;
+	}
+	
+	public void setLocal(Local local){
+		this.local = local;
+	}
+	
+	public List<Participante> getParticipantes(){
+		return participantes;
+	}
+	
+	public void setParticipantes(List<Participante> participantes){
+		this.participantes = participantes;
 	}
 
 	public boolean isCancelado() {
