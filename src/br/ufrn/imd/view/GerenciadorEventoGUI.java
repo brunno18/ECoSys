@@ -7,5 +7,7 @@ public interface GerenciadorEventoGUI {
 	public void publicarEvento();
 
 	public void notificarEventosProximos();
+	
+	public void inscreverParticipante();
 
 }
