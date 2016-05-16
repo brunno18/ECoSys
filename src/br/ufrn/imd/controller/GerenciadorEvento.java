@@ -5,35 +5,42 @@ import java.util.*;
 import br.ufrn.imd.dao.IDAOEvento;
 import br.ufrn.imd.dao.IDAOInscricao;
 import br.ufrn.imd.dao.IDAOParticipante;
-//import java.util.List;
 import br.ufrn.imd.model.*;
-//import br.ufrn.imd.model.Publicacao;
-//import br.ufrn.imd.util.service.PublicationService;
-//import br.ufrn.imd.view.GerenciadorEventoGUI;
+import br.ufrn.imd.util.service.PublicationException;
+import br.ufrn.imd.util.service.PublicationService;
+
 
 public class GerenciadorEvento {
 	
-	List<Evento> eventos = new ArrayList<Evento>();
-	
-	NotificadorEvento notificador;
+	private NotificadorEvento notificador;
 	
 	private IDAOEvento daoEvento;
 	
 	private IDAOInscricao daoInscricao;
 	
-	private IDAOParticipante daoParticipante;
-	
 	private RegraParticipacao regraParticipacao;
 	
 	private EventoValidator validatorEvento;
 	
-	public void criarEvento(Evento evento) throws ValidateEventoException{
+	private PublicationService publicationService;
+	
+	
+	public GerenciadorEvento (IDAOEvento daoEvento, IDAOInscricao daoInscricao, RegraParticipacao regraParticipacao, EventoValidator validatorEvento, PublicationService publicationService) {
+		this.daoEvento = daoEvento;
+		this.daoInscricao = daoInscricao;
+		this.regraParticipacao = regraParticipacao;
+		this.validatorEvento = validatorEvento;
+		this.publicationService = publicationService;
+	}
+	
+	public void criarEvento(Evento evento) throws ValidateEventoException {
 		validatorEvento.validar(evento);
-		eventos.add(evento);
+		daoEvento.cadastrar(evento);
 	}
 	
 	public void notificarEventosProximos(int dias){
 		Date today = new Date();
+		List<Evento> eventos = daoEvento.listar();
 		
 		for(Evento evento: eventos){
 			long diff = evento.getDataInicio().getTime() - today.getTime();
@@ -51,5 +58,9 @@ public class GerenciadorEvento {
 		Inscricao inscricao = new Inscricao(evento, participante);
 		
 		daoInscricao.cadastrar(inscricao);
+	}
+	
+	public void publicarEvento(Publicacao publicacao) throws PublicationException {
+		publicationService.publicarEvento(publicacao);
 	}
 }
