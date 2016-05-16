@@ -11,11 +11,11 @@ public class Evento {
 	
 	private  Local local;
 	
-	private List<Participante> participantes;
-	
 	private boolean cancelado;
 	
-	private Date dataEvento;
+	private Date dataInicio;
+	
+	private Date dataFim;
 	
 	
 	public int getId() {
@@ -49,14 +49,6 @@ public class Evento {
 	public void setLocal(Local local){
 		this.local = local;
 	}
-	
-	public List<Participante> getParticipantes(){
-		return participantes;
-	}
-	
-	public void setParticipantes(List<Participante> participantes){
-		this.participantes = participantes;
-	}
 
 	public boolean isCancelado() {
 		return cancelado;
@@ -66,12 +58,12 @@ public class Evento {
 		this.cancelado = cancelado;
 	}
 
-	public Date getDataEvento() {
-		return dataEvento;
+	public Date getDataInicio() {
+		return dataInicio;
 	}
 
-	public void setDataEvento(Date dataEvento) {
-		this.dataEvento = dataEvento;
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
 	}
 }
 

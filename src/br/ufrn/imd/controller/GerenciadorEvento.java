@@ -25,23 +25,21 @@ public class GerenciadorEvento {
 	
 	private RegraParticipacao regraParticipacao;
 	
-	public void criarEvento(Local local, List<Participante> participantes, String descricao, String title, Date data){
-		//Evento evento;
-		Evento evento = new Evento();
-		
-		evento.setLocal(local);
-		evento.setParticipantes(participantes);
-		evento.setDescricao(descricao);
-		evento.setTitulo(title);
-		evento.setDataEvento(data);
-		
+	private EventoValidator validatorEvento;
+	
+	public void criarEvento(Evento evento) throws ValidateEventoException{
+		validatorEvento.validar(evento);
 		eventos.add(evento);
-		//return evento;
 	}
 	
-	public void notificarEventosProximos(Date dias){
+	public void notificarEventosProximos(int dias){
+		Date today = new Date();
+		
 		for(Evento evento: eventos){
-			if(evento.getDataEvento() != dias){
+			long diff = evento.getDataInicio().getTime() - today.getTime();
+			int diffInDays = (int)(diff / (1000 * 60 * 60 * 24));
+			
+			if(diffInDays >= 0 && diffInDays <=  dias){
 				notificador.notificarProximidade(evento);
 			}	
 		}

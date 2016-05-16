@@ -1,6 +1,8 @@
 package br.ufrn.imd.controller;
 
 import java.util.*;
+
+import br.ufrn.imd.dao.IDAOInscricao;
 import br.ufrn.imd.model.*;
 import br.ufrn.imd.util.service.NotificationService;
 
@@ -10,12 +12,14 @@ public class NotificadorEvento {
 	
 	private NotificationService notificationService;
 	
+	private IDAOInscricao daoInscricao;
+	
 	public void notificarProximidade(Evento evento) {
 		Notificacao notice = noticefactory.gerarNotificacaoProximidade(evento);
-		List<Participante> participantes = evento.getParticipantes();
+		List<Inscricao> inscricoes = daoInscricao.listarInscricoesEvento(evento.getId());
 		
-		for(Participante participante : participantes) {
-			notificationService.notificar(notice, participante);
+		for(Inscricao inscricao : inscricoes) {
+			notificationService.notificar(notice, inscricao.getParticipante());
 		}
 	}
 	
