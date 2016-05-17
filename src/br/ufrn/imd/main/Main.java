@@ -12,7 +12,7 @@ public class Main {
 	public static void main (String[] args) {
 		
 		Scanner in = new Scanner(System.in);
-		GerenciadorEvento gerenciaEvento = new GerenciadorEvento();
+		//GerenciadorEvento gerenciaEvento = new GerenciadorEvento();
 		
 		String titulo;
 		String desc;
