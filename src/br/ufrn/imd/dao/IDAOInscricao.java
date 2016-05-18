@@ -6,12 +6,12 @@ import br.ufrn.imd.model.Inscricao;
 
 public interface IDAOInscricao {
 	
-	public abstract void  cadastrar(Inscricao inscricao);
+	public void  cadastrar(Inscricao inscricao);
 	
-	public abstract Inscricao recuperar(int idInscricao);
+	public Inscricao recuperar(int idInscricao);
 	
-	public abstract List<Inscricao> listarInscricoesEvento(int idEvento);
+	public List<Inscricao> listarInscricoesEvento(int idEvento);
 	
-	public abstract List<Inscricao> listarInscricoesParticipante(int idParticipante);
+	public List<Inscricao> listarInscricoesParticipante(int idParticipante);
 	
 }

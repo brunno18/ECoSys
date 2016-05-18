@@ -6,10 +6,12 @@ import br.ufrn.imd.model.Evento;
 
 public interface IDAOEvento {
 
-	public abstract void cadastrar(Evento evento);
+	public void cadastrar(Evento evento);
 	
-	public abstract Evento recuperar(int idEvento);
+	public Evento recuperar(int idEvento);
 	
-	public abstract List<Evento> listar();
+	public List<Evento> listar();
+	
+	public void atualizar(Evento evento);
 	
 }

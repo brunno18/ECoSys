@@ -63,4 +63,14 @@ public class GerenciadorEvento {
 	public void publicarEvento(Publicacao publicacao) throws PublicationException {
 		publicationService.publicarEvento(publicacao);
 	}
+	
+	public void atualizarEvento(Evento evento) {
+		daoEvento.atualizar(evento);
+	}
+	
+	public void cancelarEvento(int idEvento) {
+		Evento evento = daoEvento.recuperar(idEvento);
+		evento.setCancelado(true);
+		daoEvento.atualizar(evento);
+	}
 }

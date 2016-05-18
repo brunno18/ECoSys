@@ -4,7 +4,7 @@ import br.ufrn.imd.model.Participante;
 
 public interface IDAOParticipante {
 	
-	public abstract void cadastrar(Participante participante);
+	public void cadastrar(Participante participante);
 	
-	public abstract Participante recuperar(int idParticipante);
+	public Participante recuperar(int idParticipante);
 }

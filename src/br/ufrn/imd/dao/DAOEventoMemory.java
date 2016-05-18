@@ -47,5 +47,20 @@ public class DAOEventoMemory implements IDAOEvento {
 		}
 		return resultList;
 	}
+
+	@Override
+	public void atualizar(Evento evento) {
+		Iterator<Evento> iter = eventos.iterator();
+		
+		while(iter.hasNext()) {
+			Evento even = iter.next();
+			
+			if(even.getId() == evento.getId()) {
+				eventos.remove(even);
+				eventos.add(evento);
+				return;
+			}
+		}
+	}
 	
 }
