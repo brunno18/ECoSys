@@ -1,13 +1,9 @@
 package br.ufrn.imd.controller;
 
 import java.util.*;
-
-import br.ufrn.imd.dao.IDAOEvento;
-import br.ufrn.imd.dao.IDAOInscricao;
-import br.ufrn.imd.dao.IDAOParticipante;
+import br.ufrn.imd.dao.*;
 import br.ufrn.imd.model.*;
-import br.ufrn.imd.util.service.PublicationException;
-import br.ufrn.imd.util.service.PublicationService;
+import br.ufrn.imd.util.service.*;
 
 
 public class GerenciadorEvento {
@@ -18,6 +14,8 @@ public class GerenciadorEvento {
 	
 	private IDAOInscricao daoInscricao;
 	
+	//private IDAOParticipante daoParticipante;
+	
 	private RegraParticipacao regraParticipacao;
 	
 	private EventoValidator validatorEvento;
@@ -25,9 +23,10 @@ public class GerenciadorEvento {
 	private PublicationService publicationService;
 	
 	
-	public GerenciadorEvento (IDAOEvento daoEvento, IDAOInscricao daoInscricao, RegraParticipacao regraParticipacao, EventoValidator validatorEvento, PublicationService publicationService) {
-		this.daoEvento = daoEvento;
-		this.daoInscricao = daoInscricao;
+	public GerenciadorEvento (RegraParticipacao regraParticipacao, EventoValidator validatorEvento, PublicationService publicationService) {
+		this.daoEvento = DAOEventoMemory.getInstancia();
+		this.daoInscricao = DAOInscricaoMemory.getInstancia();
+		//this.daoParticipante = DAOParticipanteMemory.getInstancia();
 		this.regraParticipacao = regraParticipacao;
 		this.validatorEvento = validatorEvento;
 		this.publicationService = publicationService;

@@ -5,6 +5,12 @@ public class Participante {
 	private String nome;
 	private int idade;
 
+	protected Participante(int idNum, String name, int idadeNum) {
+		this.id = idNum;
+		this.nome = name;
+		this.idade = idadeNum;
+	}
+	
 	public int getId() {
 		return id;
 	}
