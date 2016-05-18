@@ -5,6 +5,6 @@ package br.ufrn.imd.instanciaClinica;
 //import br.ufrn.imd.model.ValidatePartipationException;
 
 public class RegraClinica {
-
+	
 
 }

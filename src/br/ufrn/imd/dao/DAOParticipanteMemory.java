@@ -36,4 +36,10 @@ public class DAOParticipanteMemory implements IDAOParticipante {
 		}
 		return null;
 	}
+
+	@Override
+	public List<Participante> listarParticipantes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
