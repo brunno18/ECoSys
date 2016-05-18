@@ -12,7 +12,7 @@ import br.ufrn.imd.util.service.PublicationService;
 
 public class GerenciadorEvento {
 	
-	private NotificadorEvento notificador;
+	private NotificadorEvento notificadorEvento;
 	
 	private IDAOEvento daoEvento;
 	
@@ -47,7 +47,7 @@ public class GerenciadorEvento {
 			int diffInDays = (int)(diff / (1000 * 60 * 60 * 24));
 			
 			if(diffInDays >= 0 && diffInDays <=  dias){
-				notificador.notificarProximidade(evento);
+				notificadorEvento.notificarProximidade(evento);
 			}	
 		}
 	}
@@ -58,6 +58,8 @@ public class GerenciadorEvento {
 		Inscricao inscricao = new Inscricao(evento, participante);
 		
 		daoInscricao.cadastrar(inscricao);
+		
+		notificadorEvento.notificarInscricao(evento, participante);
 	}
 	
 	public void publicarEvento(Publicacao publicacao) throws PublicationException {
@@ -66,11 +68,15 @@ public class GerenciadorEvento {
 	
 	public void atualizarEvento(Evento evento) {
 		daoEvento.atualizar(evento);
+		
+		notificadorEvento.notificarMudanca(evento);
 	}
 	
 	public void cancelarEvento(int idEvento) {
 		Evento evento = daoEvento.recuperar(idEvento);
 		evento.setCancelado(true);
 		daoEvento.atualizar(evento);
+		
+		notificadorEvento.notificarCancelamento(evento);
 	}
 }
