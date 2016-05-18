@@ -1,14 +1,9 @@
 package br.ufrn.imd.instanciaClinica;
-
-import java.text.DateFormat;
-import java.text.ParseException;
+import java.text.*;
 import java.util.*;
 
-import br.ufrn.imd.controller.EventoValidator;
-import br.ufrn.imd.controller.GerenciadorEvento;
-import br.ufrn.imd.controller.RegraParticipacao;
-import br.ufrn.imd.controller.ValidateEventoException;
-import br.ufrn.imd.model.Evento;
+import br.ufrn.imd.model.*;
+import br.ufrn.imd.controller.*;
 import br.ufrn.imd.util.service.PublicationService;
 import br.ufrn.imd.view.GerenciadorEventoGUI;
 
@@ -21,7 +16,7 @@ public class UIGerenciaClinica implements GerenciadorEventoGUI{
 	private GerenciadorEvento gerenciadorEvento = new GerenciadorEvento(regra, validator, service);
 	
 	@Override
-	public void criarEvento() throws ParseException {
+	public void criarEvento() throws ParseException{
 		try{
 			System.out.println("---Realizar Consulta---");
 			System.out.print("ID: ");
@@ -49,30 +44,56 @@ public class UIGerenciaClinica implements GerenciadorEventoGUI{
 			evento.setDataInicio(data);
 			
 			gerenciadorEvento.criarEvento(evento);
+			//publicarEvento(evento);
 		}
 		catch(ValidateEventoException e){
 			System.out.println("ERRO : " + e.getMessage());
 		}
-	
-	
 	}
 
 	@Override
-	public void atualizarEvento() {
-		// TODO Auto-generated method stub
-		
+	public void atualizarEvento() throws ParseException{
+			System.out.println("---Atualizar Consulta---");
+			System.out.print("ID: ");
+			int id = input.nextInt();
+			System.out.println("");
+			
+			System.out.print("Titulo: ");
+			String titulo = input.nextLine();
+			System.out.println("");
+			
+			System.out.print("Descricao: ");
+			String descricao = input.nextLine();
+			System.out.println("");
+			
+			DateFormat formataData = DateFormat.getInstance();
+			System.out.print("Data (dd/MM/yyyy): ");
+			String dataString = input.nextLine();
+			System.out.println("");
+			Date data = formataData.parse(dataString);
+			
+			Evento evento = new Evento();
+			evento.setId(id);
+			evento.setTitulo(titulo);
+			evento.setDescricao(descricao);
+			evento.setDataInicio(data);
+			
+			gerenciadorEvento.atualizarEvento(evento);
 	}
 
 	@Override
 	public void cancelarEvento() {
-		// TODO Auto-generated method stub
+		System.out.println("---Cancelar Consulta---");
+		System.out.print("ID: ");
+		int id = input.nextInt();
+		System.out.println("");
 		
+		gerenciadorEvento.cancelarEvento(id);	
 	}
 
 	@Override
-	public void publicarEvento() {
-		// TODO Auto-generated method stub
-		
+	public void publicarEvento(){
+		/* Publicacao nao disponivel na instancia Clinica */
 	}
 
 	@Override
@@ -83,14 +104,38 @@ public class UIGerenciaClinica implements GerenciadorEventoGUI{
 
 	@Override
 	public void notificarEventosProximos() {
-		// TODO Auto-generated method stub
+		System.out.println("---Notificar Proximas Consultas---");
+		System.out.print("Numero de dias: ");
+		int dias = input.nextInt(); 
+		gerenciadorEvento.notificarEventosProximos(dias);
 		
 	}
 
 	@Override
-	public void inscreverParticipante() {
-		// TODO Auto-generated method stub
+	public void inscreverParticipante(int idEvento) throws ValidatePartipationException {
+		System.out.println("---Inscrever Paciente---");
+		System.out.print("ID: ");
+		int id = input.nextInt();
+		System.out.println("");
 		
+		System.out.print("Nome: ");
+		String nome = input.nextLine();
+		System.out.println("");
+		
+		System.out.print("Idade: ");
+		int idade = input.nextInt();
+		System.out.println("");
+		
+		Participante participante = new Participante(id, nome, idade);
+		participante.setId(id);
+		participante.setNome(nome);
+		participante.setIdade(idade);
+		
+		//Evento evento;
+		//IDAOEvento daoEvento;
+		//daoEvento.recuperar(idEvento);
+		Evento evento = gerenciadorEvento.getEvento(idEvento);
+		gerenciadorEvento.inscreverParticipante(evento, participante);
 	}
 	
 }

@@ -1,5 +1,11 @@
 package br.ufrn.imd.instanciaClinica;
 
-public class MainClinica {
+import java.util.*;
 
+public class MainClinica {
+	private static Scanner input = new Scanner(System.in);
+	
+	public static void main(String [] args){
+		
+	}
 }

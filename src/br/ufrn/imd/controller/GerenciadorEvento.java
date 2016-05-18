@@ -78,4 +78,11 @@ public class GerenciadorEvento {
 		
 		notificadorEvento.notificarCancelamento(evento);
 	}
+	
+	public Evento getEvento(int idEvento){
+		Evento evento = daoEvento.recuperar(idEvento);
+		
+		return evento;
+	}
+	
 }
