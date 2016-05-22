@@ -39,7 +39,12 @@ public class DAOParticipanteMemory implements IDAOParticipante {
 
 	@Override
 	public List<Participante> listarParticipantes() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Participante> resultList = new ArrayList<Participante>();
+		Iterator<Participante> iter = participantes.iterator();
+		
+		while(iter.hasNext()) {
+			resultList.add(iter.next());
+		}
+		return resultList;
 	}
 }

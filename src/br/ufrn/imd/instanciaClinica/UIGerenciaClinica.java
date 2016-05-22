@@ -8,7 +8,7 @@ import br.ufrn.imd.util.service.PublicationService;
 import br.ufrn.imd.view.GerenciadorEventoGUI;
 
 public class UIGerenciaClinica implements GerenciadorEventoGUI{
-	RegraParticipacao regra;
+	RegraClinica regra;
 	EventoValidator validator;
 	PublicationService service;
 	
@@ -131,11 +131,27 @@ public class UIGerenciaClinica implements GerenciadorEventoGUI{
 		participante.setNome(nome);
 		participante.setIdade(idade);
 		
-		//Evento evento;
-		//IDAOEvento daoEvento;
-		//daoEvento.recuperar(idEvento);
+		
 		Evento evento = gerenciadorEvento.getEvento(idEvento);
 		gerenciadorEvento.inscreverParticipante(evento, participante);
+		
+		System.out.print("CPF: ");
+		String cpf = input.nextLine();
+		System.out.println("");
+		
+		System.out.print("RG: ");
+		String rg = input.nextLine();
+		System.out.println("");
+		
+		System.out.print("Num. Plano de Saude: ");
+		Long numPlano = input.nextLong();
+		System.out.println("");
+		
+		Paciente paciente = new Paciente(id, nome, idade, cpf, rg, numPlano);
+		
+		//regra.getDiasParticipante(id);
+		regra.validarParticipacao(participante);
+	
 	}
 	
 }

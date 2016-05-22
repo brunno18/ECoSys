@@ -6,11 +6,7 @@ public class Paciente extends Participante{
 	private Long numeroPlanoSaude;
 	private String cpf;
 	private String rg;
-	
-
-	public Paciente(int id, String nome, int idade){
-		super(id, nome, idade);
-	}
+		
 	
 	public Paciente(int id, String nome, int idade, String cpf, String rg, Long numeroPlanoSaude) {
 		super(id, nome, idade);
