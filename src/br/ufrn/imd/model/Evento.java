@@ -11,7 +11,7 @@ public class Evento {
 	
 	private  Local local;
 	
-	private boolean cancelado;
+	private StatusEvento status;
 	
 	private Date dataInicio;
 	
@@ -50,12 +50,12 @@ public class Evento {
 		this.local = local;
 	}
 
-	public boolean isCancelado() {
-		return cancelado;
+	public StatusEvento getStatus() {
+		return status;
 	}
-
-	public void setCancelado(boolean cancelado) {
-		this.cancelado = cancelado;
+	
+	public void setStatus(StatusEvento status) {
+		this.status = status;
 	}
 
 	public Date getDataInicio() {

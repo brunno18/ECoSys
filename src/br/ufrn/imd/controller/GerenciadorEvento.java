@@ -52,7 +52,7 @@ public class GerenciadorEvento {
 	}
 	
 	public void inscreverParticipante(Evento evento, Participante participante) throws ValidatePartipationException {
-		regraParticipacao.validarParticipacao(participante);
+		regraParticipacao.validarParticipacao(participante, evento);
 		
 		Inscricao inscricao = new Inscricao(evento, participante);
 		
@@ -73,7 +73,7 @@ public class GerenciadorEvento {
 	
 	public void cancelarEvento(int idEvento) {
 		Evento evento = daoEvento.recuperar(idEvento);
-		evento.setCancelado(true);
+		evento.setStatus(StatusEvento.CANCELADO);
 		daoEvento.atualizar(evento);
 		
 		notificadorEvento.notificarCancelamento(evento);

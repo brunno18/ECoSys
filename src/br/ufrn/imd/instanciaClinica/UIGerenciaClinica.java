@@ -150,7 +150,7 @@ public class UIGerenciaClinica implements GerenciadorEventoGUI{
 		Paciente paciente = new Paciente(id, nome, idade, cpf, rg, numPlano);
 		
 		//regra.getDiasParticipante(id);
-		regra.validarParticipacao(participante);
+		regra.validarParticipacao(participante, evento);
 	
 	}
 	

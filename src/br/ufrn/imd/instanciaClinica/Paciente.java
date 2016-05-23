@@ -3,9 +3,18 @@ package br.ufrn.imd.instanciaClinica;
 import br.ufrn.imd.model.*;
 
 public class Paciente extends Participante{
+	
 	private Long numeroPlanoSaude;
+	
+	private int prontuario;
+	
+	private String telefone;
+	
 	private String cpf;
+	
 	private String rg;
+	
+	private boolean convenioEmDia;
 		
 	
 	public Paciente(int id, String nome, int idade, String cpf, String rg, Long numeroPlanoSaude) {
@@ -37,5 +46,13 @@ public class Paciente extends Participante{
 
 	public void setRg(String rg) {
 		this.rg = rg;
+	}
+	
+	public boolean isConvenioEmDia() {
+		return convenioEmDia;
+	}
+
+	public void setConvenioEmDia(boolean convenioEmDia) {
+		this.convenioEmDia = convenioEmDia;
 	}
 }
