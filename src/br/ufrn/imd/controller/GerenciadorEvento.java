@@ -80,7 +80,8 @@ public class GerenciadorEvento {
 	}
 	
 	public Evento getEvento(int idEvento){
-		Evento evento = daoEvento.recuperar(idEvento);
+		Evento evento = new Evento();
+		evento = daoEvento.recuperar(idEvento);
 		
 		return evento;
 	}

@@ -42,7 +42,9 @@ public static final int NUMERO_MAXIMO_CONSULTAS_PENDENTES = 3;
 
 	@Override
 	public void validarParticipacao(Participante paciente, Evento consulta) throws ValidatePartipationException {
+		//List<Inscricao> inscricoes = new ArrayList<Inscricao>();
 		List<Inscricao> inscricoes = daoInscricao.listarInscricoesParticipante(paciente.getId());
+		//inscricoes
 		
 		verificarConsultasAtivas(paciente, inscricoes);
 		verificarConsultasNoDia(paciente, inscricoes, consulta);

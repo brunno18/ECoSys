@@ -4,6 +4,8 @@ import java.util.*;
 
 import br.ufrn.imd.model.*;
 import br.ufrn.imd.controller.*;
+import br.ufrn.imd.dao.DAOInscricaoMemory;
+import br.ufrn.imd.dao.IDAOInscricao;
 import br.ufrn.imd.util.service.PublicationService;
 import br.ufrn.imd.view.GerenciadorEventoGUI;
 
@@ -11,9 +13,19 @@ public class UIGerenciaClinica implements GerenciadorEventoGUI{
 	RegraClinica regra;
 	EventoValidator validator;
 	PublicationService service;
+	DAOInscricaoMemory daoInscricao;
 	
-	private Scanner input = new Scanner(System.in); 
-	private GerenciadorEvento gerenciadorEvento = new GerenciadorEvento(regra, validator, service);
+	
+	private Scanner input; 
+	private GerenciadorEvento gerenciadorEvento;
+	
+	public UIGerenciaClinica(){
+		daoInscricao = new DAOInscricaoMemory();
+		regra = new RegraClinica(daoInscricao);
+		validator = new ConsultaValidator();
+		gerenciadorEvento = new GerenciadorEvento(regra, validator, null);
+		input = new Scanner(System.in);
+	}
 	
 	@Override
 	public void criarEvento() throws ParseException{
@@ -23,6 +35,7 @@ public class UIGerenciaClinica implements GerenciadorEventoGUI{
 			int id = input.nextInt();
 			System.out.println("");
 			
+			input.nextLine();
 			System.out.print("Titulo: ");
 			String titulo = input.nextLine();
 			System.out.println("");
@@ -31,11 +44,12 @@ public class UIGerenciaClinica implements GerenciadorEventoGUI{
 			String descricao = input.nextLine();
 			System.out.println("");
 			
-			DateFormat formataData = DateFormat.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			//DateFormat formataData = DateFormat.getInstance();
 			System.out.print("Data (dd/MM/yyyy): ");
-			String dataString = input.nextLine();
+			//String dataString = input.nextLine();
 			System.out.println("");
-			Date data = formataData.parse(dataString);
+			Date data = sdf.parse(input.nextLine());
 			
 			Evento evento = new Evento();
 			evento.setId(id);
@@ -118,6 +132,7 @@ public class UIGerenciaClinica implements GerenciadorEventoGUI{
 		int id = input.nextInt();
 		System.out.println("");
 		
+		input.nextLine();
 		System.out.print("Nome: ");
 		String nome = input.nextLine();
 		System.out.println("");
@@ -130,10 +145,6 @@ public class UIGerenciaClinica implements GerenciadorEventoGUI{
 		participante.setId(id);
 		participante.setNome(nome);
 		participante.setIdade(idade);
-		
-		
-		Evento evento = gerenciadorEvento.getEvento(idEvento);
-		gerenciadorEvento.inscreverParticipante(evento, participante);
 		
 		System.out.print("CPF: ");
 		String cpf = input.nextLine();
@@ -149,9 +160,28 @@ public class UIGerenciaClinica implements GerenciadorEventoGUI{
 		
 		Paciente paciente = new Paciente(id, nome, idade, cpf, rg, numPlano);
 		
+		Evento evento = gerenciadorEvento.getEvento(idEvento);
+		gerenciadorEvento.inscreverParticipante(evento, participante);
+		
+		/*System.out.print("CPF: ");
+		String cpf = input.nextLine();
+		System.out.println("");
+		
+		System.out.print("RG: ");
+		String rg = input.nextLine();
+		System.out.println("");
+		
+		System.out.print("Num. Plano de Saude: ");
+		Long numPlano = input.nextLong();
+		System.out.println("");*/
+		
+		//Paciente paciente = new Paciente(id, nome, idade, cpf, rg, numPlano);
+		
 		//regra.getDiasParticipante(id);
 		regra.validarParticipacao(participante, evento);
 	
 	}
+	
+	//public 
 	
 }

@@ -16,7 +16,7 @@ public class DAOInscricaoMemory implements IDAOInscricao {
 		return daoInscricao;
 	}
 		
-	private DAOInscricaoMemory() {
+	public DAOInscricaoMemory() {
 		inscricoes = new HashSet<Inscricao>();
 	}
 	
