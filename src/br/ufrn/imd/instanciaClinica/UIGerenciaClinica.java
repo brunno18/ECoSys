@@ -4,16 +4,19 @@ import java.util.*;
 
 import br.ufrn.imd.model.*;
 import br.ufrn.imd.controller.*;
+import br.ufrn.imd.dao.DAOEventoMemory;
 import br.ufrn.imd.dao.DAOInscricaoMemory;
+import br.ufrn.imd.dao.IDAOEvento;
 import br.ufrn.imd.dao.IDAOInscricao;
 import br.ufrn.imd.util.service.PublicationService;
 import br.ufrn.imd.view.GerenciadorEventoGUI;
 
 public class UIGerenciaClinica implements GerenciadorEventoGUI{
-	RegraClinica regra;
+	RegraParticipacaoPaciente regra;
 	EventoValidator validator;
 	PublicationService service;
-	DAOInscricaoMemory daoInscricao;
+	IDAOInscricao daoInscricao;
+	IDAOEvento daoEvento;
 	
 	
 	private Scanner input; 
@@ -21,8 +24,9 @@ public class UIGerenciaClinica implements GerenciadorEventoGUI{
 	
 	public UIGerenciaClinica(){
 		daoInscricao = new DAOInscricaoMemory();
-		regra = new RegraClinica(daoInscricao);
-		validator = new ConsultaValidator();
+		daoEvento = DAOEventoMemory.getInstancia();
+		regra = new RegraParticipacaoPaciente(daoInscricao);
+		validator = new ConsultaValidator(daoEvento);
 		gerenciadorEvento = new GerenciadorEvento(regra, validator, null);
 		input = new Scanner(System.in);
 	}

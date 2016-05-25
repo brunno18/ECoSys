@@ -65,5 +65,13 @@ public class Evento {
 	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
+	
+	public Date getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
+	}
 }
 

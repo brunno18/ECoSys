@@ -62,5 +62,11 @@ public class DAOEventoMemory implements IDAOEvento {
 			}
 		}
 	}
+
+	@Override
+	public List<Evento> listarByStatus(StatusEvento statusEvento) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

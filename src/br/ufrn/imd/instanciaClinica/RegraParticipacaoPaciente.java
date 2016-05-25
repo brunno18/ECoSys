@@ -6,10 +6,11 @@ import br.ufrn.imd.controller.*;
 import br.ufrn.imd.dao.*;
 import br.ufrn.imd.model.*;
 
-public class RegraClinica implements RegraParticipacao{
-public static final int NUMERO_MAXIMO_CONSULTAS_PENDENTES = 3;
+public class RegraParticipacaoPaciente implements RegraParticipacao {
 	
-	public static final int NUMERO_MAXIMO_CONSULTAS_DIA = 1;
+	public static final int NUMERO_MAXIMO_CONSULTAS_PENDENTES_PADRAO = 3;
+	
+	public static final int NUMERO_MAXIMO_CONSULTAS_DIA_PADRAO = 1;
 	
 	private IDAOInscricao daoInscricao;
 	
@@ -18,10 +19,10 @@ public static final int NUMERO_MAXIMO_CONSULTAS_PENDENTES = 3;
 	private int numeroMaximoConsultasDia;
 	
 	
-	public RegraClinica(IDAOInscricao daoInscricao) {
+	public RegraParticipacaoPaciente(IDAOInscricao daoInscricao) {
 		this.daoInscricao = daoInscricao;
-		this.numeroMaximoConsultasPendentes = NUMERO_MAXIMO_CONSULTAS_PENDENTES;
-		this.numeroMaximoConsultasDia = NUMERO_MAXIMO_CONSULTAS_DIA;
+		this.numeroMaximoConsultasPendentes = NUMERO_MAXIMO_CONSULTAS_PENDENTES_PADRAO;
+		this.numeroMaximoConsultasDia = NUMERO_MAXIMO_CONSULTAS_DIA_PADRAO;
 	}
 	
 	public void setNumeroMaximoConsultaDia(int num) {
@@ -42,9 +43,7 @@ public static final int NUMERO_MAXIMO_CONSULTAS_PENDENTES = 3;
 
 	@Override
 	public void validarParticipacao(Participante paciente, Evento consulta) throws ValidatePartipationException {
-		//List<Inscricao> inscricoes = new ArrayList<Inscricao>();
 		List<Inscricao> inscricoes = daoInscricao.listarInscricoesParticipante(paciente.getId());
-		//inscricoes
 		
 		verificarConsultasAtivas(paciente, inscricoes);
 		verificarConsultasNoDia(paciente, inscricoes, consulta);
