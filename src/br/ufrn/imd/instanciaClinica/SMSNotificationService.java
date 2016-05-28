@@ -8,7 +8,8 @@ public class SMSNotificationService extends NotificationService{
 
 	@Override
 	public void notificar(Notificacao notificacao, Participante paciente) {
-		System.out.println("");
+		System.out.println(notificacao.getTitulo());
+		System.out.println(notificacao.getMensagem());
 	}
 
 }

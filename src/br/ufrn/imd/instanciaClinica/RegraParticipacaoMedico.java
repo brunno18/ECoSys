@@ -1,6 +1,7 @@
 package br.ufrn.imd.instanciaClinica;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -42,12 +43,12 @@ public class RegraParticipacaoMedico implements RegraParticipacao {
 	
 	private void verificarConsultasNoDia(Participante medico, List<Inscricao> agendamentos, Evento consulta) throws ValidatePartipationException {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		String dataEventoAtual = simpleDateFormat.format(consulta.getDataInicio());
+		String dataEventoAtual = simpleDateFormat.format(consulta.getDataInicio().getTime());
 		
 		int numeroConsultas = 0;
 		for(Inscricao inscricao : agendamentos) {
-			Date dataEvento = inscricao.getEvento().getDataInicio();
-			if (dataEventoAtual.equals(simpleDateFormat.format(dataEvento)) && inscricao.getEvento().getStatus() == StatusEvento.PEDENTE) {
+			Calendar dataEvento = inscricao.getEvento().getDataInicio();
+			if (dataEventoAtual.equals(simpleDateFormat.format(dataEvento)) && inscricao.getEvento().getStatus() == StatusEvento.PENDENTE) {
 				numeroConsultas++;
 			}
 		}

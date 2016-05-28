@@ -51,12 +51,12 @@ public class NotificacoesClinica implements FabricaNotificacao{
 	public Notificacao gerarNotificacaoConvite(Evento evento, Participante participante) {
 		Notificacao notification = new Notificacao();
 		notification.setTitulo("Notificação para nova Consulta");
-		notification.setMensagem( "/n Olá " + participante.getNome() + ", voce está marcado para a seguinte consulta: " +
-							  "/n Titulo: " + evento.getTitulo() + 
-							  "/n Descricao: " + evento.getDescicao() + 
-							  "/n Local: " + evento.getLocal().getNome() + ", " + evento.getLocal().getEndereco() +
-							  "/n Data: " + new SimpleDateFormat("dd/MM/yyyy").format(evento.getDataInicio()) +
-							  "/n");
+		notification.setMensagem( "\n Olá " + participante.getNome() + ", voce está marcado para a seguinte consulta: \n" +
+							  "\n Titulo: " + evento.getTitulo() + 
+							  "\n Descricao: " + evento.getDescicao() + 
+							  "\n Local: " + evento.getLocal().getNome() + ", " + evento.getLocal().getEndereco() +
+							  "\n Data e hora: " + new SimpleDateFormat("dd/MM/yyyy HH:mm").format(evento.getDataInicio().getTime()) +
+							  "\n");
 		
 		return notification;
 	}

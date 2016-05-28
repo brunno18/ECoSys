@@ -11,18 +11,28 @@ import br.ufrn.imd.model.ValidatePartipationException;
 public class MainClinica {
 	//private static Scanner input = new Scanner(System.in);
 	
-	private static UIGerenciaClinica manager = new UIGerenciaClinica();
+	private static UIGerenciaConsulta managerConsulta = new UIGerenciaConsulta();
+	private static UIGerenciaParticipantesClinica managerParticipantes = new UIGerenciaParticipantesClinica();
 	//public static DAOEventoMemory daoEvento = new DAOEventoMemory();
 	
 	public static void main(String [] args) throws ParseException, ValidatePartipationException{
 		
-		manager.criarEvento();
+		int i = 0;
+		while(i <= 1){
+			managerParticipantes.cadastrarParticipante();
+			i++;
+		}
+		
+		
+		//managerParticipantes.cadastrarParticipante();
+		
+		managerConsulta.criarEvento();
 		
 		//daoEvento.listar();
 		//manager.
 		//manager.atualizarEvento();
 		//manager.cancelarEvento();
-		manager.inscreverParticipante(1);
+		managerConsulta.inscreverParticipante(12);
 		//manager.notificarEventosProximos();
 		
 	}

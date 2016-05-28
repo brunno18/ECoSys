@@ -13,9 +13,9 @@ public class Evento {
 	
 	private StatusEvento status;
 	
-	private Date dataInicio;
+	private Calendar dataInicio;
 	
-	private Date dataFim;
+	private Calendar dataFim;
 	
 	
 	public int getId() {
@@ -58,19 +58,19 @@ public class Evento {
 		this.status = status;
 	}
 
-	public Date getDataInicio() {
+	public Calendar getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Date dataInicio) {
+	public void setDataInicio(Calendar dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 	
-	public Date getDataFim() {
+	public Calendar getDataFim() {
 		return dataFim;
 	}
 
-	public void setDataFim(Date dataFim) {
+	public void setDataFim(Calendar dataFim) {
 		this.dataFim = dataFim;
 	}
 }

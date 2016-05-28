@@ -17,11 +17,13 @@ public class Paciente extends Participante{
 	private boolean convenioEmDia;
 		
 	
-	public Paciente(int id, String nome, int idade, String cpf, String rg, Long numeroPlanoSaude) {
+	public Paciente(int id, String nome, int idade, String cpf, String rg, Long numeroPlanoSaude, int prontuario, String telefone) {
 		super(id, nome, idade);
 		this.setCpf(cpf);
 		this.setRg(rg);
 		this.setNumeroPlanoSaude(numeroPlanoSaude);
+		this.setProntuario(prontuario);
+		this.setTelefone(telefone);
 	}
 
 	public Long getNumeroPlanoSaude() {
@@ -54,5 +56,21 @@ public class Paciente extends Participante{
 
 	public void setConvenioEmDia(boolean convenioEmDia) {
 		this.convenioEmDia = convenioEmDia;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public int getProntuario() {
+		return prontuario;
+	}
+
+	public void setProntuario(int prontuario) {
+		this.prontuario = prontuario;
 	}
 }

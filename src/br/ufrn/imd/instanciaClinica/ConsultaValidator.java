@@ -31,7 +31,7 @@ public class ConsultaValidator extends EventoValidator {
 
 	@Override
 	public void customValidation(Evento consulta) throws ValidateEventoException {
-		List<Evento> consultas = daoEvento.listarByStatus(StatusEvento.PEDENTE);
+		List<Evento> consultas = daoEvento.listarByStatus(StatusEvento.PENDENTE);
 		
 		verificarHorarioConsulta(consulta);
 		verificarOutraConsultaMesmoHorario();
@@ -39,12 +39,12 @@ public class ConsultaValidator extends EventoValidator {
 
 	private void verificarHorarioConsulta(Evento consulta) throws ValidateEventoException {
 		Calendar calendar = Calendar.getInstance();
-		Date dataInicio = consulta.getDataInicio();
-		Date dataFim = consulta.getDataFim();
+		//Calendar dataInicio = consulta.getDataInicio();
+		//Calendar dataFim = consulta.getDataFim();
 		
-		calendar.setTime(dataInicio);  
+		//calendar.setTime(dataInicio);  
 		int horaInicio = calendar.get(Calendar.HOUR_OF_DAY);
-		calendar.setTime(dataFim);
+		//calendar.setTime(dataFim);
 		int horaFim = calendar.get(Calendar.HOUR_OF_DAY);
 		
 		if (horaInicio < horarioMinimo || horaInicio > horarioMaximo) {

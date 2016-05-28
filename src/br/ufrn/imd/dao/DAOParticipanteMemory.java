@@ -15,7 +15,7 @@ public class DAOParticipanteMemory implements IDAOParticipante {
 		return daoParticipante;
 	}
 		
-	private DAOParticipanteMemory() {
+	public DAOParticipanteMemory() {
 		participantes = new HashSet<Participante>();
 	}
 	
