@@ -38,14 +38,14 @@ public class ConsultaValidator extends EventoValidator {
 	}
 
 	private void verificarHorarioConsulta(Evento consulta) throws ValidateEventoException {
-		Calendar calendar = Calendar.getInstance();
-		//Calendar dataInicio = consulta.getDataInicio();
-		//Calendar dataFim = consulta.getDataFim();
+		//Calendar calendar = Calendar.getInstance();
+		Calendar dataInicio = consulta.getDataInicio();
+		Calendar dataFim = consulta.getDataFim();
 		
 		//calendar.setTime(dataInicio);  
-		int horaInicio = calendar.get(Calendar.HOUR_OF_DAY);
+		int horaInicio = dataInicio.get(Calendar.HOUR_OF_DAY);
 		//calendar.setTime(dataFim);
-		int horaFim = calendar.get(Calendar.HOUR_OF_DAY);
+		int horaFim = dataFim.get(Calendar.HOUR_OF_DAY);
 		
 		if (horaInicio < horarioMinimo || horaInicio > horarioMaximo) {
 			throw new ValidateEventoException("Um consulta deve ser agendada entre " + horarioMinimo + "h e " + horarioMaximo + "h");

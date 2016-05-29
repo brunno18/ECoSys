@@ -39,8 +39,8 @@ public class UIGerenciaConsulta implements GerenciadorEventoGUI{
 		notificador = new NotificadorEvento(notificadorFac, notificadorServ, daoInscricao);
 		gerenciadorEvento = new GerenciadorEvento(regraP, regraM, validator, null, notificador);
 		gerenciadorParticipante = new GerenciadorParticipante();
-		input = new Scanner(System.in);
-		
+		input = new Scanner(System.in);	
+		managerPart = new UIGerenciaParticipantesClinica();
 	}
 	
 	@Override
@@ -202,12 +202,22 @@ public class UIGerenciaConsulta implements GerenciadorEventoGUI{
 		Paciente paciente = new Paciente(0, null, 0, null, null, null, 0, null);
 		Medico medico = new Medico(0, null, 0, null);
 		
-		//System.out.println("");
-		//System.out.println("---Recuperar Paciente---");
-		//System.out.print("ID: ");
+		System.out.println("");
+		System.out.println("---Selecione o Paciente---");
+		managerPart.listarParticipantes(1);
+		System.out.println("");
+		System.out.print("ID: ");
+		int idP = input.nextInt();
 		
-		paciente = (Paciente) gerenciadorParticipante.getParticipante(1);
-		medico = (Medico) gerenciadorParticipante.getParticipante(2);
+		System.out.println("");
+		System.out.println("---Selecione o Médico---");
+		managerPart.listarParticipantes(2);
+		System.out.println("");
+		System.out.print("ID: ");
+		int idM = input.nextInt();
+		
+		paciente = (Paciente) gerenciadorParticipante.getParticipante(idP);
+		medico = (Medico) gerenciadorParticipante.getParticipante(idM);
 		
 		//paciente = managerPart.recuperarPaciente();
 		//medico = managerPart.recuperarMedico();
@@ -217,5 +227,25 @@ public class UIGerenciaConsulta implements GerenciadorEventoGUI{
 		gerenciadorEvento.inscreverParticipante(evento, paciente);	
 		gerenciadorEvento.inscreverParticipante(evento, medico);
 	
+	}
+	
+	public void listarConsultas(){
+		List <Evento> eventos = daoEvento.listar();
+		Iterator<Evento> iter = eventos.iterator();
+		Evento evento;
+		
+		while(iter.hasNext()) {
+			evento = iter.next();
+			System.out.println("ID: " + evento.getId());
+			System.out.println("Titulo: " + evento.getTitulo());
+			System.out.println("Data: " + new SimpleDateFormat("dd/MM/yyyy").format(evento.getDataInicio().getTime()));
+			
+			if(evento.getStatus() == StatusEvento.PENDENTE)
+				System.out.println("Pendente");
+			else
+				System.out.println("Aguardando inscrição");
+			
+			System.out.println("");
+		}
 	}
 }

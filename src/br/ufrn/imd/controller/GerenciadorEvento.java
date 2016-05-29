@@ -41,7 +41,7 @@ public class GerenciadorEvento {
 	public void criarEvento(Evento evento) throws ValidateEventoException {
 		validatorEvento.validar(evento);
 		daoEvento.cadastrar(evento);
-		evento.setStatus(StatusEvento.PENDENTE);
+		//evento.setStatus(StatusEvento.PENDENTE);
 	}
 	
 	public void notificarEventosProximos(int dias){
@@ -73,6 +73,7 @@ public class GerenciadorEvento {
 		if(participante instanceof Paciente) 
 			notificadorEvento.notificarInscricao(evento, participante);
 	
+		evento.setStatus(StatusEvento.PENDENTE);
 	}
 	
 	public void publicarEvento(Publicacao publicacao) throws PublicationException {

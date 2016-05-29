@@ -1,8 +1,10 @@
 package br.ufrn.imd.instanciaClinica;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
-
 import br.ufrn.imd.controller.*;
+import br.ufrn.imd.model.Participante;
 import br.ufrn.imd.view.*;
 
 public class UIGerenciaParticipantesClinica implements GerenciadorParticipanteGUI{
@@ -111,7 +113,34 @@ public class UIGerenciaParticipantesClinica implements GerenciadorParticipanteGU
 	}*/
 
 	@Override
-	public void listarParticipante() {
-		gerenciadorParticipante.listarParticipantes();
+	public void listarParticipantes(int op) {
+		List <Participante> participantes = gerenciadorParticipante.listarParticipantes();;
+		Iterator<Participante> iter = participantes.iterator();
+		Participante participante;
+		
+		while(iter.hasNext()) {
+			participante = iter.next();
+			//System.out.println("ID: " + participante.getId());
+			//System.out.println("Nome: " + participante.getNome());
+			//System.out.println("Idade: " + participante.getIdade());
+			if(op == 1 && participante instanceof Paciente){
+				System.out.println("ID: " + participante.getId());
+				System.out.println("Nome: " + participante.getNome());
+				System.out.println("Idade: " + participante.getIdade());
+				System.out.println("CPF: " + ((Paciente) participante).getCpf());
+				System.out.println("RG: " + ((Paciente) participante).getRg());
+				System.out.println("Num. Plano de Saúde: " + ((Paciente) participante).getNumeroPlanoSaude());
+				System.out.println("Telefone: " + ((Paciente) participante).getTelefone());
+				System.out.println("");
+			}
+			else if(op == 2 && participante instanceof Medico){ 
+				System.out.println("ID: " + participante.getId());
+				System.out.println("Nome: " + participante.getNome());
+				System.out.println("Idade: " + participante.getIdade());
+				System.out.println("CRM: " + ((Medico) participante).getCrm());
+				System.out.println("");
+			}
+		}
+		//gerenciadorParticipante.listarParticipantes();
 	}
 }

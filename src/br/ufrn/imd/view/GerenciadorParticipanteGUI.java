@@ -5,7 +5,9 @@ public interface GerenciadorParticipanteGUI {
 	
 	public void cadastrarParticipante();
 	
-	public void listarParticipante();
+	public void listarParticipantes(int op);
+
+	//void listarParticipantes();
 	
 	//public void recuperarParticipante();
 
