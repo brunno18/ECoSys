@@ -6,7 +6,7 @@ public class Medico extends Participante{
 	String crm;
 	
 	public Medico(int idNum, String name, int idadeNum, String crm) {
-		super(idNum, name, idadeNum);
+		super(name);
 		this.setCrm(crm);
 	}
 

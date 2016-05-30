@@ -6,9 +6,9 @@ import br.ufrn.imd.model.Participante;
 
 public interface IDAOParticipante {
 	
-	public void cadastrar(Participante participante);
+	public void cadastrar(Participante participante) throws DAOException;
 	
 	public List<Participante> listarParticipantes();
 	
-	public Participante recuperar(int idParticipante);
+	public Participante recuperar(long idParticipante);
 }

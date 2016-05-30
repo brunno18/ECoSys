@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Inscricao {
 	
-	private int id;
+	private long id;
 	
 	private Date dataInscricacao;
 	
@@ -17,11 +17,11 @@ public class Inscricao {
 		this.participante = participante;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

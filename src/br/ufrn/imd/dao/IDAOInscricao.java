@@ -8,10 +8,10 @@ public interface IDAOInscricao {
 	
 	public void  cadastrar(Inscricao inscricao);
 	
-	public Inscricao recuperar(int idInscricao);
+	public Inscricao recuperar(long idInscricao);
 	
-	public List<Inscricao> listarInscricoesEvento(int idEvento);
+	public List<Inscricao> listarInscricoesEvento(long idEvento);
 	
-	public List<Inscricao> listarInscricoesParticipante(int idParticipante);
+	public List<Inscricao> listarInscricoesParticipante(long idParticipante);
 	
 }

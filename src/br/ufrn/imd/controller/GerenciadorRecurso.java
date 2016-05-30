@@ -8,6 +8,10 @@ import br.ufrn.imd.model.Recurso;
 public class GerenciadorRecurso {
 	private IDAORecurso daoRecurso;
 	
+	public GerenciadorRecurso(IDAORecurso daoRecurso) {
+		this.daoRecurso = daoRecurso;
+	}
+	
 	public void cadastrarRecurso(Recurso recurso) {
 		daoRecurso.cadastrar(recurso);
 	}

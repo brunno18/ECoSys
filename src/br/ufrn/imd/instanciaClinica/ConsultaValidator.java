@@ -24,6 +24,7 @@ public class ConsultaValidator extends EventoValidator {
 	private int horarioMaximo;
 	
 	public ConsultaValidator(IDAOEvento daoConsulta) {
+		super(daoConsulta);
 		this.daoEvento = daoConsulta;
 		horarioMinimo = HORARIO_MINIMA_PADRAO;
 		horarioMaximo = HORARIO_MAXIMA_PADRAO;

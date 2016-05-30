@@ -6,9 +6,11 @@ import br.ufrn.imd.model.ValidatePartipationException;
 
 public interface GerenciadorEventoGUI {
 	
-	public void criarEvento() throws ParseException;
+	public void criarEvento();
 	
-	public void atualizarEvento() throws ParseException;
+	public void listarEventos();
+	
+	public void atualizarEvento();
 	
 	public void cancelarEvento();
 	
@@ -18,6 +20,6 @@ public interface GerenciadorEventoGUI {
 	
 	public void notificarEventosProximos();
 	
-	public void inscreverParticipante(int idEvento) throws ValidatePartipationException;
+	public void inscreverParticipante();
 
 }

@@ -2,8 +2,7 @@ package br.ufrn.imd.controller;
 
 import java.util.List;
 
-import br.ufrn.imd.dao.DAOInscricaoMemory;
-import br.ufrn.imd.dao.DAOParticipanteMemory;
+import br.ufrn.imd.dao.DAOException;
 import br.ufrn.imd.dao.IDAOInscricao;
 import br.ufrn.imd.dao.IDAOParticipante;
 import br.ufrn.imd.model.Inscricao;
@@ -15,12 +14,12 @@ public class GerenciadorParticipante {
 	
 	private IDAOInscricao daoInscricao;
 	
-	public GerenciadorParticipante() {
-		daoParticipante = DAOParticipanteMemory.getInstancia();
-		daoInscricao = DAOInscricaoMemory.getInstancia();
+	public GerenciadorParticipante(IDAOParticipante daoParticipante, IDAOInscricao daoInscricao) {
+		this.daoParticipante = daoParticipante;
+		this.daoInscricao = daoInscricao;
 	}
 	
-	public void cadastrarParticipante(Participante participante) {
+	public void cadastrarParticipante(Participante participante) throws DAOException{
 		daoParticipante.cadastrar(participante);
 	}
 	
@@ -28,7 +27,7 @@ public class GerenciadorParticipante {
 		return daoParticipante.listarParticipantes();
 	}
 	
-	public List<Inscricao> listarInscricoes(int idParticipante) {
+	public List<Inscricao> listarInscricoes(long idParticipante) {
 		return daoInscricao.listarInscricoesParticipante(idParticipante);
 	}
 	

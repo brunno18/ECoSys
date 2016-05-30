@@ -16,42 +16,35 @@ public class GerenciadorEvento {
 	
 	private IDAOInscricao daoInscricao;
 	
-	//private IDAOParticipante daoParticipante;
-	
-	private RegraParticipacao regraParticipacao;
-	
-	private RegraParticipacao regraParticipacao2;
-	
 	private EventoValidator validatorEvento;
 	
 	private PublicationService publicationService;
 	
 	
-	public GerenciadorEvento (RegraParticipacao regraParticipacao, RegraParticipacao regraparticipacao2, EventoValidator validatorEvento, PublicationService publicationService, NotificadorEvento notificadorEvento) {
-		this.daoEvento = DAOEventoMemory.getInstancia();
-		this.daoInscricao = DAOInscricaoMemory.getInstancia();
-		//this.daoParticipante = DAOParticipanteMemory.getInstancia();
-		this.regraParticipacao = regraParticipacao;
-		this.regraParticipacao2 = regraparticipacao2;
+	public GerenciadorEvento (EventoValidator validatorEvento, NotificadorEvento notificadorEvento, PublicationService publicationService, IDAOEvento daoEvento, IDAOInscricao daoInscricao) {
 		this.validatorEvento = validatorEvento;
-		this.publicationService = publicationService;
 		this.notificadorEvento = notificadorEvento;
+		this.publicationService = publicationService;
+		this.daoEvento = daoEvento;
+		this.daoInscricao = daoInscricao;
 	}
 	
 	public void criarEvento(Evento evento) throws ValidateEventoException {
 		validatorEvento.validar(evento);
 		daoEvento.cadastrar(evento);
-		//evento.setStatus(StatusEvento.PENDENTE);
+		evento.setStatus(StatusEvento.PENDENTE);
+	}
+	
+	public List<Evento> listarEventos() {
+		return daoEvento.listar();
 	}
 	
 	public void notificarEventosProximos(int dias){
 		Calendar today = Calendar.getInstance();
 		List<Evento> eventos = daoEvento.listar();
-		//today.getTime();
 		
 		for(Evento evento: eventos){
-			int diff = evento.getDataInicio().compareTo(today);
-			//sys
+			long diff = evento.getDataInicio().getTime().getTime() - today.getTime().getTime();
 			int diffInDays = (int)(diff / (1000 * 60 * 60 * 24));
 			
 			if(diffInDays >= 0 && diffInDays <=  dias){
@@ -60,20 +53,14 @@ public class GerenciadorEvento {
 		}
 	}
 	
-	public void inscreverParticipante(Evento evento, Participante participante) throws ValidatePartipationException {
-		if(participante instanceof Paciente)
-			regraParticipacao.validarParticipacao(participante, evento);
-		else if(participante instanceof Medico)
-			regraParticipacao2.validarParticipacao(participante, evento);
+	public void inscreverParticipante(Evento evento, Participante participante, RegraParticipacao regraParticipacao) throws ValidatePartipationException, DAOException {
+		regraParticipacao.validarParticipacao(participante, evento);
 		
 		Inscricao inscricao = new Inscricao(evento, participante);
 		
 		daoInscricao.cadastrar(inscricao);
 		
-		if(participante instanceof Paciente) 
-			notificadorEvento.notificarInscricao(evento, participante);
-	
-		evento.setStatus(StatusEvento.PENDENTE);
+		notificadorEvento.notificarInscricao(evento, participante);
 	}
 	
 	public void publicarEvento(Publicacao publicacao) throws PublicationException {
@@ -101,5 +88,4 @@ public class GerenciadorEvento {
 		
 		return evento;
 	}
-	
 }

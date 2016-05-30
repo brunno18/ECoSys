@@ -1,21 +1,20 @@
 package br.ufrn.imd.model;
 
 public class Participante {
-	private int id;
+	
+	private long id;
+	
 	private String nome;
-	private int idade;
 
-	public Participante(int idNum, String name, int idadeNum) {
-		this.id = idNum;
+	public Participante(String name) {
 		this.nome = name;
-		this.idade = idadeNum;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -25,14 +24,6 @@ public class Participante {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public int getIdade() {
-		return idade;
-	}
-
-	public void setIdade(int idade) {
-		this.idade = idade;
 	}
 	
 }

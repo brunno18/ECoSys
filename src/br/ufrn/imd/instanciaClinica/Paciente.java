@@ -18,7 +18,7 @@ public class Paciente extends Participante{
 		
 	
 	public Paciente(int id, String nome, int idade, String cpf, String rg, Long numeroPlanoSaude, int prontuario, String telefone) {
-		super(id, nome, idade);
+		super(nome);
 		this.setCpf(cpf);
 		this.setRg(rg);
 		this.setNumeroPlanoSaude(numeroPlanoSaude);
