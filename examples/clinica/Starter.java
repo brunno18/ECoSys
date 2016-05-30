@@ -41,17 +41,22 @@ public class Starter {
 		
 		IDAOInscricao daoInscricao = DAOInscricaoMemory.getInstancia();
 		
+		IDAOLocal daoConsultorio = DAOLocalMemory.getInstancia();
+		Dados.cadastrarConsultórios(daoConsultorio);
+		gerenciaConsultorio = new UIGerenciaConsultorio(daoConsultorio);
+		
 		IDAOParticipante daoPaciente = DAOPacienteMemory.getInstancia();
+		Dados.cadastrarPacientes(daoPaciente);
 		gerenciaPaciente = new UIGerenciaPaciente(daoPaciente, daoInscricao);
 		
 		IDAOParticipante daoMedico = DAOMedicoMemory.getInstancia();
+		Dados.cadastrarMedicos(daoMedico);
 		gerenciaMedico = new UIGerenciaMedico(daoMedico, daoInscricao);
-		
-		IDAOLocal daoLocal = DAOLocalMemory.getInstancia();
-		gerenciaConsultorio = new UIGerenciaConsultorio(daoLocal);
 		
 		
 		IDAOEvento daoConsulta = DAOConsultaMemory.getInstancia();
+		Dados.agendarConsultas(daoConsulta, daoInscricao, daoConsultorio, daoPaciente, daoMedico);
+		
 		NotificadorPacienteClinica notificacaoPacienteClinica = new NotificadorPacienteClinica();
 		SMSNotificationService smsNotificationService = new SMSNotificationService();
 		ConsultaValidator consultaValidator = new ConsultaValidator(daoConsulta);
@@ -69,7 +74,7 @@ public class Starter {
 				daoInscricao,
 				daoPaciente,
 				daoMedico,
-				daoLocal
+				daoConsultorio
 			);
 	}
 	

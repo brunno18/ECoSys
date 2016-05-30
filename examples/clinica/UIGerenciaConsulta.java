@@ -192,7 +192,7 @@ public class UIGerenciaConsulta implements GerenciadorEventoGUI {
 			
 			System.out.println();
 			if (counter < consultas.size()) {
-				System.out.print("Proximo Médico - Pressione Enter...");
+				System.out.print("Próxima Consulta - Pressione Enter...");
 				inputScanner.nextLine();
 				System.out.println();
 			}
