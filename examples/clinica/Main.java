@@ -2,11 +2,9 @@ package clinica;
 
 public class Main {
 	
-	public static void main(String [] args) {
-		
+	public static void main(String [] args) {	
 		Starter starter = new Starter();
 		starter.start();
-		
 	}
 	
 }

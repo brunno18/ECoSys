@@ -18,6 +18,7 @@ public class NotificadorEvento {
 	public NotificadorEvento(FabricaNotificacao noticefactory, NotificationService notificationService, IDAOInscricao daoInscricao) {
 		this.noticefactory = noticefactory;
 		this.notificationService = notificationService;
+		this.daoInscricao = daoInscricao;
 	}
 	
 	public void notificarProximidade(Evento evento) {

@@ -30,8 +30,8 @@ public class UIGerenciaPaciente implements GerenciadorParticipanteGUI {
 	
 	private GerenciadorParticipante gerenciadorParticipante;
 	
-	public UIGerenciaPaciente(IDAOParticipante daoPaciente, IDAOInscricao daoInscricao) {
-		gerenciadorParticipante = new GerenciadorParticipante(daoPaciente, daoInscricao);
+	public UIGerenciaPaciente(GerenciadorParticipante gerenciadorParticipante) {
+		this.gerenciadorParticipante = gerenciadorParticipante;
 		
 		currentMenuEntry = currentMenuEntry.START;
 	}
@@ -137,7 +137,7 @@ public class UIGerenciaPaciente implements GerenciadorParticipanteGUI {
 			System.out.println("Paciente não encontrado!");
 		}
 		else {
-			List<Inscricao> inscricoes = gerenciadorParticipante.listarInscricoes(paciente.getId());
+			List<Inscricao> inscricoes = gerenciadorParticipante.listarInscricoes(paciente.getId(), TipoInscricao.PACIENTE);
 			List<Evento> consultasPendentes = new ArrayList<Evento>();
 			List<Evento> consultasCan = new ArrayList<Evento>();
 			

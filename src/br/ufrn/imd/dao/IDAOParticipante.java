@@ -2,6 +2,7 @@ package br.ufrn.imd.dao;
 
 import java.util.List;
 
+import br.ufrn.imd.controller.GerenciadorParticipante;
 import br.ufrn.imd.model.Participante;
 
 public interface IDAOParticipante {

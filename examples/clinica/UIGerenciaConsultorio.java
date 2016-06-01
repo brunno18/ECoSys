@@ -25,8 +25,8 @@ public class UIGerenciaConsultorio implements GerenciadorLocalGUI {
 	
 	private GerenciadorLocal gerenciadorLocal;
 	
-	public UIGerenciaConsultorio(IDAOLocal daoLocal) {
-		gerenciadorLocal = new GerenciadorLocal(daoLocal);
+	public UIGerenciaConsultorio(GerenciadorLocal gerenciadorLocal) {
+		this.gerenciadorLocal = gerenciadorLocal;
 		currentMenuEntry = MENU_ENTRY.START;
 	}
 	

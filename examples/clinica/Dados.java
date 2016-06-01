@@ -57,10 +57,16 @@ public class Dados {
 		
 		Calendar dataInicio1 = Calendar.getInstance();
 		Calendar dataInicio2 = Calendar.getInstance(); 
+		Calendar dataInicio3 = Calendar.getInstance(); 
+		Calendar dataInicio4 = Calendar.getInstance(); 
 		
 		dataInicio1.set(2016, Calendar.JULY, 15, 15, 00);
-		dataInicio2.set(2016, Calendar.JULY, 15, 15, 40);
+		dataInicio2.set(2016, Calendar.JULY, 19, 14, 40);
+		dataInicio3.set(2016, Calendar.SEPTEMBER, 20, 15, 00);
+		dataInicio4.set(2016, Calendar.SEPTEMBER, 10, 18, 00);
 		
+		
+		//Agenda uma Consulta com Dr. Nicole e o Paciente Rubens
 		Evento consulta1 = new Consulta(
 				"Consulta - Dra. Nicole",
 				"Consulta com a Dra. Nicole, para realização de exames gerais.",
@@ -69,6 +75,13 @@ public class Dados {
 			);
 		daoConsulta.cadastrar(consulta1);
 		
+		Inscricao inscricaoConsulta1Paciente1 = new Inscricao(daoConsulta.recuperar(0), daoPaciente.recuperar(0), TipoInscricao.PACIENTE);
+		daoInscricao.cadastrar(inscricaoConsulta1Paciente1);
+		Inscricao inscricaoConsulta1Medico1 = new Inscricao(daoConsulta.recuperar(0), daoMedico.recuperar(0), TipoInscricao.MEDICO);
+		daoInscricao.cadastrar(inscricaoConsulta1Medico1);
+		
+		
+		//Agenda uma Consulta com Dr. Thiago e o Paciente Rubens
 		Evento consulta2 = new Consulta(
 				"Consulta - Dr. Thiago",
 				"Consulta com a Dr. Thiago, para realização de exame cardiólogico.",
@@ -78,15 +91,42 @@ public class Dados {
 		
 		daoConsulta.cadastrar(consulta2);
 		
+		Inscricao inscricaoConsulta2Paciente1 = new Inscricao(daoConsulta.recuperar(1), daoPaciente.recuperar(0), TipoInscricao.PACIENTE);
+		daoInscricao.cadastrar(inscricaoConsulta2Paciente1);
+		Inscricao inscricaoConsulta2Medico2 = new Inscricao(daoConsulta.recuperar(1), daoMedico.recuperar(1), TipoInscricao.MEDICO);
+		daoInscricao.cadastrar(inscricaoConsulta2Medico2);
 		
-		Inscricao inscricaoConsulta1Paciente = new Inscricao(daoConsulta.recuperar(0), daoPaciente.recuperar(0));
-		daoInscricao.cadastrar(inscricaoConsulta1Paciente);
-		Inscricao inscricaoConsulta1Medico = new Inscricao(daoConsulta.recuperar(0), daoMedico.recuperar(0));
-		daoInscricao.cadastrar(inscricaoConsulta1Medico);
 		
-		Inscricao inscricaoConsulta2Paciente = new Inscricao(daoConsulta.recuperar(1), daoPaciente.recuperar(1));
-		daoInscricao.cadastrar(inscricaoConsulta2Paciente);
-		Inscricao inscricaoConsulta2Medico = new Inscricao(daoConsulta.recuperar(1), daoMedico.recuperar(1));
-		daoInscricao.cadastrar(inscricaoConsulta2Medico);
+		//Agenda uma Consulta com Dr. Thiago e o Paciente Rubens
+		Evento consulta3 = new Consulta(
+				"Consulta - Dr. Thiago",
+				"Inspeção de Saude de Rotina",
+				daoConsultorio.recuperar(2L),
+				dataInicio3
+			);
+		
+		daoConsulta.cadastrar(consulta3);
+		
+		Inscricao inscricaoConsulta3Paciente1 = new Inscricao(daoConsulta.recuperar(2), daoPaciente.recuperar(0), TipoInscricao.PACIENTE);
+		daoInscricao.cadastrar(inscricaoConsulta3Paciente1);
+		Inscricao inscricaoConsulta3Medico2 = new Inscricao(daoConsulta.recuperar(2), daoMedico.recuperar(1), TipoInscricao.MEDICO);
+		daoInscricao.cadastrar(inscricaoConsulta3Medico2);
+		
+		
+		//Agenda uma consulta com Dra. Nicole e o Paciente Kauê
+		Evento consulta4 = new Consulta(
+				"Consulta - Dra. Nicole",
+				"Inspeção de Saude",
+				daoConsultorio.recuperar(0L),
+				dataInicio4
+			);
+		
+		daoConsulta.cadastrar(consulta4);
+		
+		Inscricao inscricaoConsulta4Paciente2 = new Inscricao(daoConsulta.recuperar(3), daoPaciente.recuperar(1), TipoInscricao.PACIENTE);
+		daoInscricao.cadastrar(inscricaoConsulta4Paciente2);
+		Inscricao inscricaoConsulta4Medico1 = new Inscricao(daoConsulta.recuperar(3), daoMedico.recuperar(0), TipoInscricao.MEDICO);
+		daoInscricao.cadastrar(inscricaoConsulta4Medico1);
+		
 	}
 }

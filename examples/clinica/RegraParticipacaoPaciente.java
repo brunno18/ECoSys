@@ -43,7 +43,7 @@ public class RegraParticipacaoPaciente implements RegraParticipacao {
 
 	@Override
 	public void validarParticipacao(Participante paciente, Evento consulta) throws ValidatePartipationException {
-		List<Inscricao> inscricoes = daoInscricao.listarInscricoesParticipante(paciente.getId());
+		List<Inscricao> inscricoes = daoInscricao.listarInscricoesParticipante(paciente.getId(), TipoInscricao.PACIENTE);
 		
 		verificarConsultasAtivas(paciente, inscricoes);
 		verificarConsultasNoDia(paciente, inscricoes, consulta);

@@ -12,6 +12,6 @@ public interface IDAOInscricao {
 	
 	public List<Inscricao> listarInscricoesEvento(long idEvento);
 	
-	public List<Inscricao> listarInscricoesParticipante(long idParticipante);
+	public List<Inscricao> listarInscricoesParticipante(long idParticipante, String tipoInscricao);
 	
 }

@@ -35,8 +35,8 @@ public class RegraParticipacaoMedico implements RegraParticipacao {
 	}
 
 	@Override
-	public void validarParticipacao(Participante medico, Evento consulta) throws ValidatePartipationException {
-		List<Inscricao> inscricoes = daoInscricao.listarInscricoesParticipante(medico.getId());
+	public void validarParticipacao(Participante medico, Evento consulta) throws ValidatePartipationException {		
+		List<Inscricao> inscricoes = daoInscricao.listarInscricoesParticipante(medico.getId(), TipoInscricao.MEDICO);
 		
 		verificarConsultasNoDia(medico, inscricoes, consulta);
 	}
@@ -48,7 +48,7 @@ public class RegraParticipacaoMedico implements RegraParticipacao {
 		int numeroConsultas = 0;
 		for(Inscricao inscricao : agendamentos) {
 			Calendar dataEvento = inscricao.getEvento().getDataInicio();
-			if (dataEventoAtual.equals(simpleDateFormat.format(dataEvento)) && inscricao.getEvento().getStatus() == StatusEvento.PENDENTE) {
+			if (dataEventoAtual.equals(simpleDateFormat.format(dataEvento.getTime())) && inscricao.getEvento().getStatus() == StatusEvento.PENDENTE) {
 				numeroConsultas++;
 			}
 		}

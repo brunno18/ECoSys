@@ -27,8 +27,8 @@ public class UIGerenciaMedico implements GerenciadorParticipanteGUI {
 	
 	private GerenciadorParticipante gerenciadorParticipante;
 	
-	public UIGerenciaMedico(IDAOParticipante daoMedico, IDAOInscricao daoInscricao) {
-		gerenciadorParticipante = new GerenciadorParticipante(daoMedico, daoInscricao);
+	public UIGerenciaMedico(GerenciadorParticipante gerenciadorParticipante) {
+		this.gerenciadorParticipante = gerenciadorParticipante;
 		
 		currentMenuEntry = currentMenuEntry.START;
 	}

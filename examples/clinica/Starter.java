@@ -2,6 +2,10 @@ package clinica;
 
 import java.util.Scanner;
 
+import br.ufrn.imd.controller.GerenciadorEvento;
+import br.ufrn.imd.controller.GerenciadorLocal;
+import br.ufrn.imd.controller.GerenciadorParticipante;
+import br.ufrn.imd.controller.NotificadorEvento;
 import br.ufrn.imd.dao.IDAOEvento;
 import br.ufrn.imd.dao.IDAOInscricao;
 import br.ufrn.imd.dao.IDAOLocal;
@@ -42,40 +46,41 @@ public class Starter {
 		IDAOInscricao daoInscricao = DAOInscricaoMemory.getInstancia();
 		
 		IDAOLocal daoConsultorio = DAOLocalMemory.getInstancia();
-		Dados.cadastrarConsultórios(daoConsultorio);
-		gerenciaConsultorio = new UIGerenciaConsultorio(daoConsultorio);
+		GerenciadorLocal gerenciadorLocal = new GerenciadorLocal(daoConsultorio);
+		gerenciaConsultorio = new UIGerenciaConsultorio(gerenciadorLocal);
 		
 		IDAOParticipante daoPaciente = DAOPacienteMemory.getInstancia();
-		Dados.cadastrarPacientes(daoPaciente);
-		gerenciaPaciente = new UIGerenciaPaciente(daoPaciente, daoInscricao);
+		GerenciadorParticipante gerenciadorPaciente = new GerenciadorParticipante(daoPaciente, daoInscricao);
+		gerenciaPaciente = new UIGerenciaPaciente(gerenciadorPaciente);
 		
 		IDAOParticipante daoMedico = DAOMedicoMemory.getInstancia();
-		Dados.cadastrarMedicos(daoMedico);
-		gerenciaMedico = new UIGerenciaMedico(daoMedico, daoInscricao);
-		
+		GerenciadorParticipante gerenciadorMedico = new GerenciadorParticipante(daoMedico, daoInscricao);
+		gerenciaMedico = new UIGerenciaMedico(gerenciadorMedico);
 		
 		IDAOEvento daoConsulta = DAOConsultaMemory.getInstancia();
-		Dados.agendarConsultas(daoConsulta, daoInscricao, daoConsultorio, daoPaciente, daoMedico);
 		
-		NotificadorPacienteClinica notificacaoPacienteClinica = new NotificadorPacienteClinica();
+		NotificadorPacienteClinica notificadorPacienteClinica = new NotificadorPacienteClinica();
 		SMSNotificationService smsNotificationService = new SMSNotificationService();
 		ConsultaValidator consultaValidator = new ConsultaValidator(daoConsulta);
 		RegraParticipacaoPaciente regraParticipacaoPaciente = new RegraParticipacaoPaciente(daoInscricao);
 		RegraParticipacaoMedico regraParticipacaoMedico = new RegraParticipacaoMedico(daoInscricao);
 		
+		NotificadorEvento notificadorEvento = new NotificadorEvento(notificadorPacienteClinica, smsNotificationService, daoInscricao);
+		GerenciadorEvento gerenciadorEvento = new GerenciadorEvento(consultaValidator, notificadorEvento, null, daoConsulta, daoInscricao);
 		
 		gerenciaConsulta = new UIGerenciaConsulta(
-				notificacaoPacienteClinica,
-				smsNotificationService,
-				consultaValidator,
-				regraParticipacaoPaciente,
-				regraParticipacaoMedico,
-				daoConsulta,
-				daoInscricao,
-				daoPaciente,
-				daoMedico,
-				daoConsultorio
-			);
+					gerenciadorEvento, 
+					gerenciadorPaciente, 
+					gerenciadorMedico, 
+					gerenciadorLocal,
+					regraParticipacaoPaciente, 
+					regraParticipacaoMedico
+				);
+		
+		Dados.cadastrarConsultórios(daoConsultorio);
+		Dados.cadastrarPacientes(daoPaciente);
+		Dados.cadastrarMedicos(daoMedico);
+		Dados.agendarConsultas(daoConsulta, daoInscricao, daoConsultorio, daoPaciente, daoMedico);
 	}
 	
 	private void toWelcome() {

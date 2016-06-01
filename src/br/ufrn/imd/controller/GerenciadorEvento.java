@@ -1,5 +1,6 @@
 package br.ufrn.imd.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import br.ufrn.imd.dao.*;
 import br.ufrn.imd.instanciaClinica.Medico;
@@ -44,8 +45,8 @@ public class GerenciadorEvento {
 		List<Evento> eventos = daoEvento.listar();
 		
 		for(Evento evento: eventos){
-			long diff = evento.getDataInicio().getTime().getTime() - today.getTime().getTime();
-			int diffInDays = (int)(diff / (1000 * 60 * 60 * 24));
+			long difference =  (evento.getDataInicio().getTime().getTime() - today.getTime().getTime())/86400000;
+			long diffInDays = Math.abs(difference);
 			
 			if(diffInDays >= 0 && diffInDays <=  dias){
 				notificadorEvento.notificarProximidade(evento);
@@ -53,10 +54,10 @@ public class GerenciadorEvento {
 		}
 	}
 	
-	public void inscreverParticipante(Evento evento, Participante participante, RegraParticipacao regraParticipacao) throws ValidatePartipationException, DAOException {
+	public void inscreverParticipante(Evento evento, Participante participante, String tipoInscricao, RegraParticipacao regraParticipacao) throws ValidatePartipationException {
 		regraParticipacao.validarParticipacao(participante, evento);
 		
-		Inscricao inscricao = new Inscricao(evento, participante);
+		Inscricao inscricao = new Inscricao(evento, participante, tipoInscricao);
 		
 		daoInscricao.cadastrar(inscricao);
 		
@@ -87,5 +88,13 @@ public class GerenciadorEvento {
 		evento = daoEvento.recuperar(idEvento);
 		
 		return evento;
+	}
+	
+	public List<Inscricao> listarInscricoesEvento(long idEvento) {
+		return daoInscricao.listarInscricoesEvento(idEvento);
+	}
+	
+	public List<Inscricao> listarInscricoesParticipante(long idParticipante, String tipoInscricao) {
+		return daoInscricao.listarInscricoesParticipante(idParticipante, tipoInscricao);
 	}
 }

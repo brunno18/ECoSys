@@ -27,11 +27,11 @@ public class GerenciadorParticipante {
 		return daoParticipante.listarParticipantes();
 	}
 	
-	public List<Inscricao> listarInscricoes(long idParticipante) {
-		return daoInscricao.listarInscricoesParticipante(idParticipante);
+	public List<Inscricao> listarInscricoes(long idParticipante, String tipoInscricao) {
+		return daoInscricao.listarInscricoesParticipante(idParticipante, tipoInscricao);
 	}
 	
-	public Participante getParticipante(int idParticipante){
+	public Participante getParticipante(long idParticipante){
 		Participante participante;
 		participante = daoParticipante.recuperar(idParticipante);
 		

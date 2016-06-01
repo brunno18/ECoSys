@@ -64,18 +64,17 @@ public class DAOInscricaoMemory implements IDAOInscricao {
 	}
 
 	@Override
-	public List<Inscricao> listarInscricoesParticipante(long idParticipante) {
+	public List<Inscricao> listarInscricoesParticipante(long idParticipante, String tipoInscricao) {
 		List<Inscricao> resultList = new ArrayList<Inscricao>();
-		Iterator<Inscricao> iter = inscricoes.iterator();
+		Iterator<Inscricao> it = inscricoes.iterator();
 		
-		while(iter.hasNext()) {
-			Inscricao insc = iter.next();
-			if(insc.getParticipante().getId() == idParticipante) {
-				resultList.add(insc);
+		while(it.hasNext()) {
+			Inscricao inscricao = it.next();
+			if(inscricao.getTipo().equals(tipoInscricao) && inscricao.getParticipante().getId() == idParticipante) {
+				resultList.add(inscricao);
 			}
 		}
 		
 		return resultList;
 	}
-
 }

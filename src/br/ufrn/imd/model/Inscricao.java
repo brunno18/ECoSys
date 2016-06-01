@@ -12,9 +12,12 @@ public class Inscricao {
 	
 	private Participante participante;
 	
-	public Inscricao(Evento evento, Participante participante) {
+	private String tipoInscricao;
+	
+	public Inscricao(Evento evento, Participante participante, String tipoInscricao) {
 		this.evento = evento;
 		this.participante = participante;
+		this.tipoInscricao = tipoInscricao;
 	}
 
 	public long getId() {
@@ -47,5 +50,13 @@ public class Inscricao {
 
 	public void setParticipante(Participante participante) {
 		this.participante = participante;
+	}
+
+	public String getTipo() {
+		return tipoInscricao;
+	}
+
+	public void setTipo(String tipoInscricao) {
+		this.tipoInscricao = tipoInscricao;
 	}
 }
